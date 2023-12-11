@@ -43,7 +43,7 @@
                             <span class="bg-light p-1 border border-dark-subtle">{{ $genre->name }}</span>
                             @endforeach
                         </td>
-                        <td>{{ $game->platform }}</td>
+                        <td>{{ $game->platform->name }}</td>
                         <td>
                             <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
                                 <a class="btn btn-outline-primary" href="{{ route('games.show', $game->id) }}">Show</a>

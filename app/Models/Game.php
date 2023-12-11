@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Genre;
+use App\Models\Platform;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -17,5 +18,10 @@ class Game extends Model
     public function genres()
     {
         return $this->belongsToMany(Genre::class);
+    }
+
+    public function platform()
+    {
+        return $this->belongsTo(Platform::class);
     }
 }

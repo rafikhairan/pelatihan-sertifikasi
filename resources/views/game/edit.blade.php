@@ -38,11 +38,10 @@
                 <div class="col-lg-6 mb-3">
                     <label class="form-label" for="platform">Platform</label>
                     <select id="platform" class="form-select" aria-label="Default select example" name="platform">
-                        <option selected>Select platform</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
+                        @foreach($platforms as $platform)
+                        <option value="{{ $platform->id }}" @if($data->platform_id == $platform->id) selected @endif>{{ $platform->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-lg-12 mb-3">
                     <label class="form-label" for="publisher">Genre</label>

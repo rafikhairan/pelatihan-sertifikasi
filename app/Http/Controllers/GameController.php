@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use App\Models\Genre;
+use App\Models\Platform;
 use App\Models\GameGenre;
 use Illuminate\Http\Request;
 
@@ -29,8 +30,9 @@ class GameController extends Controller
     public function create()
     {
         $genres = Genre::all();
+        $platforms = Platform::all();
 
-        return view('game.create', compact('genres'));
+        return view('game.create', compact('genres', 'platforms'));
     }
 
     /**
@@ -47,7 +49,7 @@ class GameController extends Controller
             'name' => $request->name,
             'publisher' => $request->publisher,
             'release_date' => $request->release,
-            'platform' => $request->platform,
+            'platform_id' => $request->platform,
         ];
 
         $insertedId = $game->insertGetId($data);
@@ -56,7 +58,7 @@ class GameController extends Controller
             foreach($request->genres as $genreId) {
                 GameGenre::create([
                     'game_id' => $insertedId,
-                    'genre_id' => $genre,
+                    'genre_id' => $genreId,
                 ]);
             }
         }
@@ -95,6 +97,7 @@ class GameController extends Controller
         return view('game.edit', [
             'data' => $game,
             'genres' => Genre::all(),
+            'platforms' => Platform::all(),
             'gameGenreIds' => $gameGenreIds
         ]);
     }
@@ -112,7 +115,7 @@ class GameController extends Controller
             'name' => $request->name,
             'publisher' => $request->publisher,
             'release_date' => $request->release,
-            'platform' => $request->platform,
+            'platform_id' => $request->platform,
         ]);
 
         $gameGenreIds = $game->genres->pluck('id')->toArray();
