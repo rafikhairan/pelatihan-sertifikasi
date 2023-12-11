@@ -61,7 +61,7 @@
           <div class="modal-body p-4">
             <div class="mb-3">
               <label for="genre" class="form-label">Name</label>
-              <input type="text" class="form-control" id="genre" name="genre">
+              <input type="text" class="form-control" id="genre" name="genre" required>
             </div>
             <div class="d-grid">
               <button type="submit" class="btn btn-primary w-full">Save</button>
@@ -112,7 +112,7 @@
           <div class="modal-body p-4">
             <div class="mb-3">
               <label for="edit-genre" class="form-label">Name</label>
-              <input type="text" class="form-control" id="edit-genre" name="genre">
+              <input type="text" class="form-control" id="edit-genre" name="genre" required>
             </div>
             <div class="d-grid">
               <button type="submit" class="btn btn-primary w-full">Save</button>

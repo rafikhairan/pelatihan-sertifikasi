@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/DataTables-1.13.8/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
 </head>
 <body class="bg-light">
@@ -19,12 +19,11 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ auth()->user()->username }}
+                    {{ auth()->user()->name }}
                 </a>
                 <!-- Here's the magic. Add the .animate and .slideIn classes to your .dropdown-menu and you're all set! -->
                 <div class="dropdown-menu position-absolute dropdown-menu-end animate slideIn" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Profil</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="{{ route('profile') }}">Profil</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/logout">Logout</a>
                 </div>
@@ -39,7 +38,7 @@
             <div class="col-lg-3 col-xl-2 pt-3 pe-0 border-end">
                 <div class="offcanvas-lg offcanvas-start vh-100" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">App</h5>
+                        <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">Gameshark</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasNavbar" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
@@ -64,7 +63,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-9 col-xl-10 py-3">
+            <div class="col-lg-9 col-xl-10 py-3 ps-4">
                 <!-- Content -->
                 @yield('content')
             </div>
@@ -75,7 +74,7 @@
     <script src="{{ asset('assets/vendor/jQuery-3.7.0/jquery-3.7.0.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/DataTables-1.13.8/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/DataTables-1.13.8/js/dataTables.bootstrap5.min.js') }}"></script>
-    <script src="assets/js/bootstrap.bundle.js"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
     @stack('scripts')
 </body>
 </html>
