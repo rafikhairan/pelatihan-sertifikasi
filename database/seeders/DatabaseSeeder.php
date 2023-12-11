@@ -18,19 +18,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::create([
-            'username' => 'ikramzaidann',
+            'name' => 'Admin',
+            'username' => 'admin',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
-            'role' => 'Admin'
-        ]);
-        
-        Student::create([
-            'nik' => '3216022007020020',
-            'nisn' => '0023978634',
-            'name' => 'IKRAM ZAIDAN WICAKSONO',
-            'gender' => 'Laki-laki',
-            'birthplace' => 'BEKASI',
-            'birthdate' => '2002-07-20',
-            'status' => 1
+            'is_admin' => true
         ]);
     }
 }

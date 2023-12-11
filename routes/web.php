@@ -28,10 +28,6 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
     Route::get('/user', [UserController::class, 'index']);
-    Route::get('/student', [StudentController::class, 'create']);
-    Route::get('/teacher', [TeacherController::class, 'create']);
-    Route::get('/class', [SchoolClassController::class, 'create']);
-    Route::get('/course', [CourseController::class, 'create']);
     Route::get('/logout', [LoginController::class, 'destroy']);
 });
 
