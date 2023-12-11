@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <script src="assets/js/bootstrap.bundle.js"></script>
+    <link href="{{ asset('assets/vendor/DataTables-1.13.8/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
 </head>
 <body class="bg-light">
     <!-- Navigation -->
@@ -15,7 +15,7 @@
             <button class="btn btn-light d-lg-none me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="#">SekolahApp</a>
+            <a class="navbar-brand" href="#">App</a>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -39,7 +39,7 @@
             <div class="col-lg-3 col-xl-2 pt-3 pe-0 border-end">
                 <div class="offcanvas-lg offcanvas-start vh-100" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">SekolahApp</h5>
+                        <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">App</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasNavbar" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
@@ -63,7 +63,10 @@
         </div>
     </div>
 
-
-    
+    <script src="{{ asset('assets/vendor/jQuery-3.7.0/jquery-3.7.0.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/DataTables-1.13.8/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/DataTables-1.13.8/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="assets/js/bootstrap.bundle.js"></script>
+    @stack('scripts')
 </body>
 </html>

@@ -1,13 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\Auth\RegisterController;
 
 /*
@@ -21,13 +17,13 @@ use App\Http\Controllers\Auth\RegisterController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index']);
-    Route::get('/user', [UserController::class, 'index']);
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/users', [UserController::class, 'index']);
     Route::get('/logout', [LoginController::class, 'destroy']);
 });
 
