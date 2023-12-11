@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RentalController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -19,11 +21,10 @@ use App\Http\Controllers\Auth\RegisterController;
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/users', [UserController::class, 'index']);
+    Route::get('/games', [GameController::class, 'index']);
+    Route::get('/rentals', [RentalController::class, 'index']);
     Route::get('/logout', [LoginController::class, 'destroy']);
 });
 

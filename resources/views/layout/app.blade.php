@@ -15,7 +15,7 @@
             <button class="btn btn-light d-lg-none me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="#">App</a>
+            <a class="navbar-brand" href="#">Gameshark</a>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -45,10 +45,16 @@
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/home">Dashboard</a>
+                                <a class="nav-link active" aria-current="page" href="/">Dashboard</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/users">User</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/games">Game</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/rentals">Rental</a>
                             </li>
                         </ul>
                     </div>
