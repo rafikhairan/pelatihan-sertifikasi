@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('game_genres', function (Blueprint $table) {
+        Schema::create('game_genre', function (Blueprint $table) {
             $table->id();
             $table->foreignId('game_id')->constrained()->onDelete('restrict');
             $table->foreignId('genre_id')->constrained()->onDelete('restrict');

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('publisher');
             $table->date('release_date');
-            $table->date('platform');
-            $table->string('photo');
+            $table->string('platform');
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Models\Genre;
+use App\Models\GameGenre;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -14,7 +16,9 @@ class GameController extends Controller
      */
     public function index()
     {
-        return view('game.index');
+        $games = Game::all();
+
+        return view('game.index', compact('games'));
     }
 
     /**
@@ -24,7 +28,9 @@ class GameController extends Controller
      */
     public function create()
     {
-        //
+        $genres = Genre::all();
+
+        return view('game.create', compact('genres'));
     }
 
     /**
@@ -35,7 +41,28 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $game = new Game();
+
+        $data = [
+            'name' => $request->name,
+            'publisher' => $request->publisher,
+            'release_date' => $request->release,
+            'platform' => $request->platform,
+        ];
+
+        $insertedId = $game->insertGetId($data);
+        
+        if($request->genres) {
+            foreach($request->genres as $genreId) {
+                GameGenre::create([
+                    'game_id' => $insertedId,
+                    'genre_id' => $genre,
+                ]);
+            }
+        }
+
+        return redirect()->route('games.index')->with('success', 'Game successfully created!');
+
     }
 
     /**
@@ -46,7 +73,13 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        //
+        $gameGenreIds = $game->genres->pluck('id')->toArray();
+
+        return view('game.edit', [
+            'data' => $game,
+            'genres' => Genre::all(),
+            'gameGenreIds' => $gameGenreIds
+        ]);
     }
 
     /**
@@ -57,7 +90,13 @@ class GameController extends Controller
      */
     public function edit(Game $game)
     {
-        //
+        $gameGenreIds = $game->genres->pluck('id')->toArray();
+
+        return view('game.edit', [
+            'data' => $game,
+            'genres' => Genre::all(),
+            'gameGenreIds' => $gameGenreIds
+        ]);
     }
 
     /**
@@ -69,7 +108,33 @@ class GameController extends Controller
      */
     public function update(Request $request, Game $game)
     {
-        //
+        Game::where('id', $game->id)->update([
+            'name' => $request->name,
+            'publisher' => $request->publisher,
+            'release_date' => $request->release,
+            'platform' => $request->platform,
+        ]);
+
+        $gameGenreIds = $game->genres->pluck('id')->toArray();
+
+        if(!$request->genres) {
+            GameGenre::where('game_id', $game->id)->delete();
+        }else{
+            foreach($request->genres as $genreId) {
+                if(!in_array($genreId, $gameGenreIds)) {
+                    GameGenre::create([
+                        'game_id' => $game->id,
+                        'genre_id' => $genreId,
+                    ]);
+                }
+            }
+
+            $genresToRemove = array_diff($gameGenreIds, $request->genres);
+
+            GameGenre::where('game_id', $game->id)->whereIn('genre_id', $genresToRemove)->delete();
+        }
+
+        return redirect()->route('games.index')->with('success', 'Game successfully updated!');
     }
 
     /**
@@ -80,6 +145,8 @@ class GameController extends Controller
      */
     public function destroy(Game $game)
     {
-        //
+        Game::where('id', $game->id)->delete();
+
+        return redirect('/games')->with('success', 'Game successfully deleted!');
     }
 }

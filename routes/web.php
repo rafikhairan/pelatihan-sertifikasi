@@ -25,9 +25,13 @@ use App\Http\Controllers\ProfileController;
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/users', [UserController::class, 'index']);
-    Route::get('/games', [GameController::class, 'index']);
+
+    Route::resource('/games', GameController::class);
+
     Route::resource('/genres', GenreController::class)->except(['create', 'show', 'edit']);
+
     Route::get('/rentals', [RentalController::class, 'index']);
+
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
