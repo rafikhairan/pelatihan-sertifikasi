@@ -63,7 +63,7 @@ class GameController extends Controller
             }
         }
 
-        return redirect()->route('games.index')->with('success', 'Game successfully created!');
+        return redirect()->route('games.index')->with('success', 'Game successfully created.');
 
     }
 
@@ -137,7 +137,7 @@ class GameController extends Controller
             GameGenre::where('game_id', $game->id)->whereIn('genre_id', $genresToRemove)->delete();
         }
 
-        return redirect()->route('games.index')->with('success', 'Game successfully updated!');
+        return redirect()->route('games.index')->with('success', 'Game successfully updated.');
     }
 
     /**
@@ -150,6 +150,6 @@ class GameController extends Controller
     {
         Game::where('id', $game->id)->delete();
 
-        return redirect('/games')->with('success', 'Game successfully deleted!');
+        return redirect('/games')->with('success', 'Game successfully deleted.');
     }
 }

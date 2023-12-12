@@ -34,7 +34,7 @@
                     <div class="card-body p-0">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h1 text-cs font-weight-bold font-italic mb-4">SekolahApp</h1>
+                                <h1 class="h1 text-cs font-weight-bold font-italic mb-4">Gameshark</h1>
                                 @if(session()->has('success'))
                                 <div class="alert alert-success alert-dismissible fade show">{{ session('success') }}</div>
                                 @endif

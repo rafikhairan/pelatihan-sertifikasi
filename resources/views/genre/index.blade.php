@@ -6,13 +6,13 @@
       <h2>Genres</h2>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
           <li class="breadcrumb-item active" aria-current="page">Genres</li>
         </ol>
       </nav>
     </div>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-modal">
-      Create Genre
+      Add Genre
     </button>
   </div>
   @if (session()->has('success'))
@@ -37,8 +37,10 @@
               <td>{{ $loop->iteration }}</td>
               <td>{{ $genre->name }}</td>
               <td>
-                <button type="button" class="btn badge text-bg-secondary" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="bindingEdit({{ $genre->id }}, '{{ $genre->name }}')">Edit</button>
-                <button type="button" class="btn badge text-bg-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="bindingDelete({{ $genre->id }})">Delete</button>
+                <div class="d-flex align-items-center">
+                  <button type="button" class="btn badge text-bg-secondary" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="bindingEdit({{ $genre->id }}, '{{ $genre->name }}')">Edit</button>
+                  <button type="button" class="btn badge text-bg-danger ms-1" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="bindingDelete({{ $genre->id }})">Delete</button>
+                </div>
               </td>
             </tr>
           @endforeach

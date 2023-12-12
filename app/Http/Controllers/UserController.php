@@ -38,9 +38,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->password !== $request->confirm_password) {
-            return redirect('/users/create')->with('failed', 'Password and confirmation do not match!')->withInput();
-        }
+        $request->validate([
+            'username' => 'unique:users',
+            'email' => 'unique:users',
+            'password' => 'confirmed'
+        ]);
 
         $data = [
             'name' => $request->name,
@@ -60,7 +62,7 @@ class UserController extends Controller
 
         User::create($data);
 
-        return redirect('/users')->with('success', 'User successfully created!');
+        return redirect('/users')->with('success', 'User successfully added.');
     }
 
     /**
@@ -82,6 +84,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if(auth()->user()->username !== 'admin' && $user->is_admin) {
+            abort(403);
+        }
+
         return view('user.edit', compact('user'));
     }
 
@@ -94,6 +100,16 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if(auth()->user()->username !== 'admin' && $user->is_admin) {
+            abort(403);
+        }
+
+        $request->validate([
+            'username' => 'unique:users,username,'.$user->id,
+            'email' => 'unique:users,email,'.$user->id,
+            'password' => 'confirmed'
+        ]);
+
         $data = [
             'name' => $request->name,
             'username' => $request->username,
@@ -103,18 +119,22 @@ class UserController extends Controller
         ];
 
         if ($request->password !== null && $request->confirm_password !== null) {
-            if ($request->password !== $request->confirm_password) {
-                return redirect()->back()->withInput();
-            }
             $data['password'] = Hash::make($request->password);
+        }
+
+        if($request->file('photo')) {
+            $photo = explode('.', $request->file('photo')->getClientOriginalName())[0];
+            $photo = $photo . '-' . time() . '.' . $request->file('photo')->extension();
+            $request->file('photo')->storeAs('uploads/profile', $photo);
+            $data['photo'] = 'profile/' . $photo;
         }
 
         $user->update($data);
 
-        return redirect('/users')->with('success', 'User successfully updated!');
+        return redirect('/users')->with('success', 'User successfully updated.');
     }
 
-    /**
+    /** 
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\User  $user
@@ -122,8 +142,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if(auth()->user()->username !== 'admin' && $user->is_admin) {
+            abort(403);
+        }
+
         $user->delete();
 
-        return redirect('/users')->with('success', 'User successfully deleted!');
+        return redirect('/users')->with('success', 'User successfully deleted.');
     }
 }
