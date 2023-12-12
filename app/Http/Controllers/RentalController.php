@@ -14,7 +14,9 @@ class RentalController extends Controller
      */
     public function index()
     {
-        return view('rental.index');
+        $rentals = Rental::all();
+
+        return view('rental.index', compact('rentals'));
     }
 
     /**
@@ -35,7 +37,15 @@ class RentalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'user_id' => auth()->user()->id,
+            'game_id' => $request->game,
+        ];
+
+        Rental::create($data);
+
+        return redirect()->back()->with('success', 'Request sent.');
+
     }
 
     /**
@@ -69,7 +79,13 @@ class RentalController extends Controller
      */
     public function update(Request $request, Rental $rental)
     {
-        //
+        $data = [
+            'status' => $request->status,
+        ];
+
+        Rental::where('id', $rental->id)->update($data);
+
+        return redirect()->back()->with('success', 'Request succesfully approved!');
     }
 
     /**

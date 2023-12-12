@@ -18,6 +18,8 @@ class HomeController extends Controller
             return view('home.admin', compact('userCount', 'adminCount', 'gameCount'));
         }
 
-        return view('home.user');
+        $games = Game::all();
+
+        return view('web.home', compact('games'));
     }
 }

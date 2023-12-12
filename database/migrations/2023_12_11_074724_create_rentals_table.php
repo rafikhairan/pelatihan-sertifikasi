@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('game_id')->nullable()->constrained()->onDelete('set null');
-            $table->timestamp('return_date');
+            $table->enum('status', ['Pending', 'Approved', 'Requested', 'Returned'])->default('Pending');
+            $table->integer('penalty')->nullable();
+            $table->timestamp('return_date')->nullable()->default(NULL);
             $table->timestamps();
         });
     }

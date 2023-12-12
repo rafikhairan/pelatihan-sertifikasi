@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use App\Models\Genre;
+use App\Models\Rental;
 use App\Models\Platform;
 use App\Models\GameGenre;
 use Illuminate\Http\Request;
@@ -17,6 +18,10 @@ class GameController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->is_admin == false) {
+            abort(403);
+        }
+
         $games = Game::all();
 
         return view('game.index', compact('games'));
@@ -52,6 +57,13 @@ class GameController extends Controller
             'platform_id' => $request->platform,
         ];
 
+        if($request->file('photo')) {
+            $photo = explode('.', $request->file('photo')->getClientOriginalName())[0];
+            $photo = $photo . '-' . time() . '.' . $request->file('photo')->extension();
+            $request->file('photo')->storeAs('public/uploads/game', $photo);
+            $data['photo'] = 'game/' . $photo;
+        }
+
         $insertedId = $game->insertGetId($data);
         
         if($request->genres) {
@@ -63,7 +75,7 @@ class GameController extends Controller
             }
         }
 
-        return redirect()->route('games.index')->with('success', 'Game successfully created.');
+        return redirect()->route('games.index')->with('success', 'Game successfully created!');
 
     }
 
@@ -75,6 +87,21 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
+        if(!auth()->user()->is_admin) {
+            $genres       = Genre::all();
+            $isRented     = Rental::where('game_id', $game->id)
+                            ->where('user_id', auth()->user()->id)
+                            ->whereIn('status', ['Pending', 'Approved', 'Requested'])
+                            ->exists();
+            $rentalStatus = Rental::where('game_id', $game->id)
+                            ->where('user_id', auth()->user()->id)
+                            ->whereIn('status', ['Pending', 'Approved', 'Requested'])
+                            ->latest('created_at')
+                            ->first();
+
+            return view('web.game', compact('game', 'genres', 'isRented', 'rentalStatus'));
+        }
+
         $gameGenreIds = $game->genres->pluck('id')->toArray();
 
         return view('game.edit', [
@@ -118,6 +145,13 @@ class GameController extends Controller
             'platform_id' => $request->platform,
         ]);
 
+        if($request->file('photo')) {
+            $photo = explode('.', $request->file('photo')->getClientOriginalName())[0];
+            $photo = $photo . '-' . time() . '.' . $request->file('photo')->extension();
+            $request->file('photo')->storeAs('public/uploads/game', $photo);
+            $data['photo'] = 'game/' . $photo;
+        }
+
         $gameGenreIds = $game->genres->pluck('id')->toArray();
 
         if(!$request->genres) {
@@ -137,7 +171,7 @@ class GameController extends Controller
             GameGenre::where('game_id', $game->id)->whereIn('genre_id', $genresToRemove)->delete();
         }
 
-        return redirect()->route('games.index')->with('success', 'Game successfully updated.');
+        return redirect()->route('games.index')->with('success', 'Game successfully updated!');
     }
 
     /**
@@ -150,6 +184,6 @@ class GameController extends Controller
     {
         Game::where('id', $game->id)->delete();
 
-        return redirect('/games')->with('success', 'Game successfully deleted.');
+        return redirect('/games')->with('success', 'Game successfully deleted!');
     }
 }

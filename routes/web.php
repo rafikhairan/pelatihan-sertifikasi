@@ -24,12 +24,12 @@ use App\Http\Controllers\HomeController;
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::resource('/users', UserController::class)->middleware('admin');
     Route::resource('/games', GameController::class);
     Route::resource('/genres', GenreController::class)->except(['create', 'show', 'edit']);
     Route::resource('/platforms', PlatformController::class)->except(['create', 'show', 'edit']);
-    Route::get('/rentals', [RentalController::class, 'index']);
+    Route::resource('/rentals', RentalController::class);
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
