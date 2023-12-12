@@ -6,13 +6,13 @@
             <h2>Users</h2>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Users</li>
                 </ol>
             </nav>
         </div>
         <a class="btn btn-primary" href="{{ route('users.create') }}">
-            Create User
+            Add User
         </a>
     </div>
     @if (session()->has('success'))
@@ -21,17 +21,12 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-    @error('username')
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ $message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @enderror
     <div class="card">
         <div class="card-body">
             <table class="table" id="table">
                 <thead>
                     <tr>
+                        <th>Image</th>
                         <th>Username</th>
                         <th>Email</th>
                         <th>Name</th>
@@ -42,13 +37,27 @@
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
+                            <td>
+                                @if ($user->photo !== null)
+                                    <img src="{{ asset('storage/uploads/' . $user->photo) }}" class="rounded-circle" alt="Image" width="30px">
+                                @else
+                                    <img src="{{ asset('assets/img/no-profile.png') }}" class="rounded-circle" alt="Image" width="30px">
+                                @endif
+                            </td>
                             <td>{{ $user->username }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->is_admin ? 'Admin' : 'User' }}</td>
                             <td>
-                                <a href="{{ route('users.edit', $user->username) }}" class="badge text-bg-secondary text-decoration-none">Edit</a>
-                                <button type="button" class="btn badge text-bg-danger text-decoration-none" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="bindingDelete({{ $user->id }})">Delete</button>
+                                <div class="d-flex">
+                                    @if ((auth()->user()->username !== 'admin' && $user->is_admin) || auth()->user()->username === $user->username)
+                                        <button type="button" class="btn badge text-bg-secondary text-decoration-none" disabled>Edit</button>
+                                        <button type="button" class="btn badge text-bg-danger text-decoration-none ms-1" disabled>Delete</button>
+                                    @else
+                                        <a href="{{ route('users.edit', $user->username) }}" class="btn badge text-bg-secondary text-decoration-none">Edit</a>
+                                        <button type="button" class="btn badge text-bg-danger text-decoration-none ms-1" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="bindingDelete('{{ $user->username }}')">Delete</button>
+                                    @endif
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -89,8 +98,8 @@
     <script>
         const table = new DataTable('#table')
 
-        function bindingDelete(id) {
-            $('#delete-form').attr('action', `{{ url('users') }}/${id}`)
+        function bindingDelete(username) {
+            $('#delete-form').attr('action', `{{ url('users') }}/${username}`)
         }
     </script>
 @endpush

@@ -6,7 +6,7 @@
       <h2>Profile</h2>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
           <li class="breadcrumb-item active" aria-current="page">Profile</li>
         </ol>
       </nav>
@@ -16,6 +16,20 @@
   @if (session()->has('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       {{ session('success') }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  @endif
+  @if ($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      @if ($errors->count() > 1)
+        <ul class="m-0">
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      @else
+        {{ $errors->first() }}
+      @endif
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   @endif
@@ -50,7 +64,7 @@
       </form>
     </div>
     <div class="col-4 mt-4 pt-2">
-      <img src="{{ $user->photo ? asset('storage/uploads/' . $user->photo) : asset('assets/img/no-profile.png') }}" class="img-thumbnail" alt="...">
+      <img src="{{ $user->photo ? asset('storage/uploads/' . $user->photo) : asset('assets/img/no-profile.png') }}" class="img-thumbnail" alt="Photo">
     </div>
   </div>
 @endsection

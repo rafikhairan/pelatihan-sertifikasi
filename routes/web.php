@@ -7,9 +7,9 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PlatformController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +24,8 @@ use App\Http\Controllers\Auth\RegisterController;
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', [DashboardController::class, 'index']);
-    Route::resource('/users', UserController::class);
+    Route::get('/', [HomeController::class, 'index']);
+    Route::resource('/users', UserController::class)->middleware('admin');
     Route::resource('/games', GameController::class);
     Route::resource('/genres', GenreController::class)->except(['create', 'show', 'edit']);
     Route::resource('/platforms', PlatformController::class)->except(['create', 'show', 'edit']);

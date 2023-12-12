@@ -41,7 +41,7 @@ class GenreController extends Controller
             'name' => $request->genre
         ]);
 
-        return redirect('/genres')->with('success', 'Genre successfully created!');
+        return redirect('/genres')->with('success', 'Genre successfully added.');
     }
 
     /**
@@ -79,7 +79,7 @@ class GenreController extends Controller
             'name' => $request->genre
         ]);
 
-        return redirect('/genres')->with('success', 'Genre successfully edited!');
+        return redirect('/genres')->with('success', 'Genre successfully edited.');
     }
 
     /**
@@ -92,6 +92,6 @@ class GenreController extends Controller
     {
         $genre->delete();
 
-        return redirect('/genres')->with('success', 'Genre successfully deleted!');
+        return redirect('/genres')->with('success', 'Genre successfully deleted.');
     }
 }

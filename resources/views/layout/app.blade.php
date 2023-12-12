@@ -46,11 +46,13 @@
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/">Dashboard</a>
+                                <a class="nav-link active" aria-current="page" href="/">Home</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/users">User</a>
-                            </li>
+                            @if (auth()->user()->is_admin) 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/users">User</a>
+                                </li>
+                            @endif
                             <li class="nav-item">
                                 <a class="nav-link" href="/games">Game</a>
                             </li>

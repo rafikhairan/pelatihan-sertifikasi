@@ -5,15 +5,29 @@
         <h2>Users</h2>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Users</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Create User</li>
+                <li class="breadcrumb-item active" aria-current="page">Add User</li>
             </ol>
         </nav>
     </div>
     @if (session()->has('failed'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {{ session('failed') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @if ($errors->count() > 1)
+                <ul class="m-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @else
+                {{ $errors->first() }}
+            @endif
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
@@ -50,7 +64,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="confirm-password" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirm-password" name="confirm_password">
+                    <input type="password" class="form-control" id="confirm-password" name="password_confirmation">
                 </div>
                 <div class="mb-4">
                     <label for="address" class="form-label">Address</label>
