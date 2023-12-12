@@ -34,6 +34,12 @@
 
     <!-- Header -->
     <div class="container py-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{ $game->name }}</li>
+            </ol>
+        </nav>
         <div class="d-flex flex-row align-items-center mb-3">
             <h2>{{ $game->name }}</h2>
             <div class="bg-secondary px-2 py-1 ms-3 text-white align-self-center">{{ $game->platform->name }}</div>
@@ -44,7 +50,7 @@
                     <div class="card-body pb-0">
                         <p>Publisher: {{ $game->publisher }}</p>
                         <p>Release Date: {{ $game->release_date }}</p>
-                        <p>Tags: @if($game->genres) @foreach($game->genres as $genre) {{ $genre->name }} @endforeach @endif</p>
+                        <p>Tags: @if($game->genres) @foreach($game->genres as $genre) <a href="/">{{ $genre->name }}</a>, @endforeach @endif</p>
                     </div>
                 </div>
                 <p>
@@ -57,7 +63,7 @@
                 <form action="{{ route('rentals.store') }}" method="post">
                     @csrf
                     <input type="hidden" name="game" value="{{ $game->id }}">
-                    <button class="btn btn-primary w-100 mb-3" {{ $isRented ? 'disabled' : '' }}>{{ $isRented ? 'Request sent' : 'Rent' }}</button>
+                    <button class="btn btn-primary w-100 mb-3" {{ $rentalCount >= 2 ? 'disabled' : ($isRented ? 'disabled' : '') }}>{{ $isRented ? 'Request sent' : 'Rent' }}</button>
                 </form>
                 @endif
                 @if($rentalStatus)

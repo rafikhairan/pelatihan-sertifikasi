@@ -98,8 +98,12 @@ class GameController extends Controller
                             ->whereIn('status', ['Pending', 'Approved', 'Requested'])
                             ->latest('created_at')
                             ->first();
+            $rentalCount  = Rental::where('user_id', auth()->user()->id)
+                            ->whereIn('status', ['Pending', 'Approved', 'Requested'])
+                            ->count();
+                        
 
-            return view('web.game', compact('game', 'genres', 'isRented', 'rentalStatus'));
+            return view('web.game', compact('game', 'genres', 'isRented', 'rentalStatus', 'rentalCount'));
         }
 
         $gameGenreIds = $game->genres->pluck('id')->toArray();

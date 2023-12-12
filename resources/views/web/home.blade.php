@@ -47,7 +47,7 @@
             <div class="row mb-2 mb-lg-4">
                 @foreach($games as $game)
                 <div class="col-md-6 col-lg-4 mb-3">
-                    <img class="img-product border-0 p-0" src="{{ $game->photo ? asset('storage/uploads/' . $game->photo) : asset('assets/img/no-profile.png') }}">
+                    <a href="{{ route('games.show', $game->id) }}"><img class="img-product border-0 p-0" src="{{ $game->photo ? asset('storage/uploads/' . $game->photo) : asset('assets/img/no-profile.png') }}"></a>
                     <div class="bg-black p-3">
                         <a href="{{ route('games.show', $game->id) }}" class="h5 text-white text-decoration-none text-truncate mb-0">{{ $game->name }}</a>
                         <div class="text-white">
