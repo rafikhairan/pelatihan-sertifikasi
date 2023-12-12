@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('game_genres', function (Blueprint $table) {
+        Schema::create('platforms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('game_id')->constrained()->onDelete('restrict');
-            $table->foreignId('genre_id')->constrained()->onDelete('restrict');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('game_genres');
+        Schema::dropIfExists('platforms');
     }
 };

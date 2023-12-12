@@ -3,12 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\RentalController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\GenreController;
-use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +26,9 @@ use App\Http\Controllers\ProfileController;
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
     Route::resource('/users', UserController::class);
-    Route::get('/games', [GameController::class, 'index']);
+    Route::resource('/games', GameController::class);
     Route::resource('/genres', GenreController::class)->except(['create', 'show', 'edit']);
+    Route::resource('/platforms', PlatformController::class)->except(['create', 'show', 'edit']);
     Route::get('/rentals', [RentalController::class, 'index']);
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');

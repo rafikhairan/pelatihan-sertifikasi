@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('rentals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('restrict');
-            $table->foreignId('game_id')->constrained()->onDelete('restrict');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('game_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamp('return_date');
             $table->timestamps();
         });

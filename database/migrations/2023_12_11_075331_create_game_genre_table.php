@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('games', function (Blueprint $table) {
+        Schema::create('game_genre', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('publisher');
-            $table->date('release_date');
-            $table->foreignId('platform_id')->nullable()->constrained()->onDelete('set null');
-            $table->string('photo')->nullable();
+            $table->foreignId('game_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('genre_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('games');
+        Schema::dropIfExists('game_genres');
     }
 };
