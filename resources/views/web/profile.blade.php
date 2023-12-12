@@ -32,54 +32,61 @@
         </div>
     </nav>
 
-    <!-- Header -->
+    <!-- Section -->
     <div class="container py-4">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">{{ $game->name }}</li>
+              <li class="breadcrumb-item active" aria-current="page">Profile</li>
             </ol>
         </nav>
         <div class="d-flex flex-row align-items-center mb-3">
-            <h2>{{ $game->name }}</h2>
-            <div class="bg-secondary px-2 py-1 ms-3 text-white align-self-center">{{ $game->platform->name }}</div>
+            <h2>Profile</h2>
         </div>
         <div class="row">
             <div class="col-lg-8">
                 <div class="card mb-3 rounded-0">
-                    <div class="card-body pb-0">
-                        <p>Publisher: {{ $game->publisher }}</p>
-                        <p>Release Date: {{ $game->release_date }}</p>
-                        <p>Tags: @if($game->genres) @foreach($game->genres as $genre) <a href="/">{{ $genre->name }}</a>, @endforeach @endif</p>
+                    <div class="card-body">
+                        <form action="{{ route('profile.update') }}"  method="post" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $user->name) }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" value="{{ old('username', $user->username) }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="photo" class="form-label">Photo</label>
+                                <input class="form-control" type="file" id="photo" name="photo" accept="image/*">
+                            </div>
+                            <button class="btn btn-success rounded-0 w-100 py-2">Simpan</button> 
+                        </form>
                     </div>
                 </div>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi tenetur praesentium illum blanditiis quos quas delectus, vero nesciunt placeat totam deserunt earum eos quisquam dolorem magni minima labore magnam reprehenderit provident odio! Vero, autem! Architecto deserunt eligendi libero tempora veniam error, ipsa voluptatum possimus quasi deleniti, iusto, dignissimos quia dolore sed quis asperiores sapiente! Cumque ad suscipit consequatur doloremque perspiciatis exercitationem sit cum mollitia magni tenetur rerum dolores impedit quasi, ipsam magnam reprehenderit ea! Tempora eligendi adipisci beatae facilis maiores hic iure sed eos unde quo temporibus odit, enim ratione qui praesentium cumque voluptatum. Sed facilis consectetur nulla officia velit!
-                </p>
             </div>
             <div class="col-lg-4">
-                <img class="img-header border-0 p-0 mb-3" src="{{ $game->photo ? asset('storage/uploads/' . $game->photo) : asset('assets/img/no-profile.png') }}">
-                @if(!$isRented or $rentalStatus->status != 'Approved' and $rentalStatus->status != 'Requested')
-                <form action="{{ route('rentals.store') }}" method="post">
-                    @csrf
-                    <input type="hidden" name="game" value="{{ $game->id }}">
-                    <button class="btn btn-primary w-100 mb-3" {{ $rentalCount >= 2 ? 'disabled' : ($isRented ? 'disabled' : '') }}>{{ $isRented ? 'Request sent' : 'Rent' }}</button>
-                </form>
-                @endif
-                @if($rentalStatus)
-                    @if($rentalStatus->status == 'Approved' or $rentalStatus->status == 'Requested')
-                    <form action="{{ route('rentals.update', $rentalStatus->id) }}" method="post">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="status" value="Requested">
-                        <button class="btn btn-success w-100" {{ $rentalStatus->status == 'Requested' ? 'disabled' : '' }}>{{ $rentalStatus->status == 'Requested' ? 'Waiting for return approval' : 'Return' }}</button>
-                    </form>
-                    @endif
-                @endif
+                <img class="img-thumbnail" src="{{ $user->photo ? asset('storage/uploads/' . $user->photo) : asset('assets/img/no-profile.png') }}">
             </div>
         </div>
     </div>
     
+    @push('scripts')
+    <script>
+        const $photo = $('#photo');
+        $photo.change(function(event) {
+            const imageUrl = URL.createObjectURL(event.target.files[0])
+            $('.img-thumbnail').attr('src', imageUrl)
+        })
+    </script>
+    @endpush
+
     <script src="{{ asset('assets/vendor/jQuery-3.7.0/jquery-3.7.0.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/DataTables-1.13.8/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/DataTables-1.13.8/js/dataTables.bootstrap5.min.js') }}"></script>

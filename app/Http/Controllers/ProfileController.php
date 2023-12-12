@@ -10,6 +10,12 @@ class ProfileController extends Controller
 {
     public function index()
     {
+        if(!auth()->user()->is_admin) {
+            $user = User::where('id', auth()->user()->id)->first();
+
+            return view('web.profile', compact('user'));
+        }
+
         $user = User::where('id', auth()->user()->id)->first();
 
         return view('profile.index', compact('user'));
