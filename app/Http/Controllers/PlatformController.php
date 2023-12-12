@@ -92,6 +92,6 @@ class PlatformController extends Controller
     {
         Platform::where('id', $platform->id)->delete();
 
-        return redirect('/genres')->with('success', 'Genre successfully deleted!');
+        return redirect('/platforms')->with('success', 'Platform successfully deleted!');
     }
 }

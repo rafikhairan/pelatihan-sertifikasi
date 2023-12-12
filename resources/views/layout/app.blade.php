@@ -55,10 +55,13 @@
                                 <a class="nav-link" href="/games">Game</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="/rentals">Rental</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="/genres">Genre</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/rentals">Rental</a>
+                                <a class="nav-link" href="/platforms">Platform</a>
                             </li>
                         </ul>
                     </div>

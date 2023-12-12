@@ -37,10 +37,8 @@
               <td>{{ $loop->iteration }}</td>
               <td>{{ $platform->name }}</td>
               <td>
-                <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
-                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="bindingEdit({{ $platform->id }}, '{{ $platform->name }}')">Edit</button>
-                  <button type="button" class="btn btn-outline-danger border-start-0" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="bindingDelete({{ $platform->id }})">Delete</button>
-                </div>
+                <button type="button" class="btn badge text-bg-secondary" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="bindingEdit({{ $platform->id }}, '{{ $platform->name }}')">Edit</button>
+                <button type="button" class="btn badge text-bg-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="bindingDelete({{ $platform->id }})">Delete</button>
               </td>
             </tr>
           @endforeach

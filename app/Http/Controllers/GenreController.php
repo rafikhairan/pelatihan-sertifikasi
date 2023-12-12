@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Genre;
+use App\Models\GameGenre;
 use Illuminate\Http\Request;
 
 class GenreController extends Controller
@@ -90,6 +91,8 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
+        GameGenre::where('genre_id', $genre->id)->delete();
+
         $genre->delete();
 
         return redirect('/genres')->with('success', 'Genre successfully deleted!');

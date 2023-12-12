@@ -32,7 +32,7 @@ class ProfileController extends Controller
         if($request->file('photo')) {
             $photo = explode('.', $request->file('photo')->getClientOriginalName())[0];
             $photo = $photo . '-' . time() . '.' . $request->file('photo')->extension();
-            $request->file('photo')->storeAs('uploads/profile', $photo);
+            $request->file('photo')->storeAs('public/uploads/profile', $photo);
             $data['photo'] = 'profile/' . $photo;
         }
 

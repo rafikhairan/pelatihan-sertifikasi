@@ -26,6 +26,7 @@
             <table class="table" id="table">
                 <thead>
                     <tr>
+                        <th>No.</th>
                         <th>Name</th>
                         <th>Publisher</th>
                         <th>Genre</th>
@@ -36,14 +37,15 @@
                 <tbody>
                     @foreach ($games as $game)
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $game->name }}</td>
                         <td>{{ $game->publisher }}</td>
                         <td>
                             @foreach ($game->genres as $genre)
-                            <span class="bg-light p-1 border border-dark-subtle">{{ $genre->name }}</span>
+                            <span class="fst-italic bg-light px-1 border border-dark-subtle">{{ $genre->name }}</span>
                             @endforeach
                         </td>
-                        <td>{{ $game->platform->name }}</td>
+                        <td>@if($game->platform){{ $game->platform->name }}@endif</td>
                         <td>
                             <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
                                 <a class="btn btn-outline-primary" href="{{ route('games.show', $game->id) }}">Show</a>
