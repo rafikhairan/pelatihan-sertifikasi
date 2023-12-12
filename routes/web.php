@@ -24,7 +24,7 @@ use App\Http\Controllers\ProfileController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
-    Route::get('/users', [UserController::class, 'index']);
+    Route::resource('/users', UserController::class);
     Route::get('/games', [GameController::class, 'index']);
     Route::resource('/genres', GenreController::class)->except(['create', 'show', 'edit']);
     Route::get('/rentals', [RentalController::class, 'index']);

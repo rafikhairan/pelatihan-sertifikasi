@@ -6,7 +6,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('profile') }}">Profile</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('profile') }}">Profile</a></li>
         <li class="breadcrumb-item active" aria-current="page">Change Password</li>
       </ol>
     </nav>

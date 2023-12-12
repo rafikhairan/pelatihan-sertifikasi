@@ -73,9 +73,9 @@ class GenreController extends Controller
      * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Genre $genre)
     {
-        Genre::where('id', $id)->update([
+        $genre->update([
             'name' => $request->genre
         ]);
 
@@ -88,9 +88,9 @@ class GenreController extends Controller
      * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Genre $genre)
     {
-        Genre::where('id', $id)->delete();
+        $genre->delete();
 
         return redirect('/genres')->with('success', 'Genre successfully deleted!');
     }

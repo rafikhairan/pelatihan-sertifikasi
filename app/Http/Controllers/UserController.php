@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -26,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.create');
     }
 
     /**
@@ -37,7 +38,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->password !== $request->confirm_password) {
+            return redirect('/users/create')->with('failed', 'Password and confirmation do not match!')->withInput();
+        }
+
+        $data = [
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'is_admin' => $request->role,
+            'address' => $request->address
+        ];
+
+        if($request->file('photo')) {
+            $photo = explode('.', $request->file('photo')->getClientOriginalName())[0];
+            $photo = $photo . '-' . time() . '.' . $request->file('photo')->extension();
+            $request->file('photo')->storeAs('uploads/profile', $photo);
+            $data['photo'] = 'profile/' . $photo;
+        }
+
+        User::create($data);
+
+        return redirect('/users')->with('success', 'User successfully created!');
     }
 
     /**
@@ -59,7 +82,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -71,7 +94,24 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $data = [
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'is_admin' => $request->role,
+            'address' => $request->address
+        ];
+
+        if ($request->password !== null && $request->confirm_password !== null) {
+            if ($request->password !== $request->confirm_password) {
+                return redirect()->back()->withInput();
+            }
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $user->update($data);
+
+        return redirect('/users')->with('success', 'User successfully updated!');
     }
 
     /**
@@ -82,6 +122,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect('/users')->with('success', 'User successfully deleted!');
     }
 }

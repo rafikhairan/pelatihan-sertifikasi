@@ -37,10 +37,8 @@
               <td>{{ $loop->iteration }}</td>
               <td>{{ $genre->name }}</td>
               <td>
-                <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
-                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="bindingEdit({{ $genre->id }}, '{{ $genre->name }}')">Edit</button>
-                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="bindingDelete({{ $genre->id }})">Delete</button>
-                </div>
+                <button type="button" class="btn badge text-bg-secondary" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="bindingEdit({{ $genre->id }}, '{{ $genre->name }}')">Edit</button>
+                <button type="button" class="btn badge text-bg-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="bindingDelete({{ $genre->id }})">Delete</button>
               </td>
             </tr>
           @endforeach
@@ -58,7 +56,7 @@
         </div>
         <form action="{{ route('genres.store') }}" method="POST">
           @csrf
-          <div class="modal-body p-4">
+          <div class="modal-body px-4 pb-4 pt-3">
             <div class="mb-3">
               <label for="genre" class="form-label">Name</label>
               <input type="text" class="form-control" id="genre" name="genre" required>
@@ -82,7 +80,7 @@
         <form action="" method="POST" id="delete-form">
           @csrf
           @method('DELETE')
-          <div class="modal-body p-4">
+          <div class="modal-body px-4 pb-4 pt-3">
             <div class="mb-3 text-center">
               <svg class="mb-3" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
@@ -109,7 +107,7 @@
         <form action="{{ route('genres.store') }}" method="POST" id="edit-form">
           @csrf
           @method('PUT')
-          <div class="modal-body p-4">
+          <div class="modal-body px-4 pb-4 pt-3">
             <div class="mb-3">
               <label for="edit-genre" class="form-label">Name</label>
               <input type="text" class="form-control" id="edit-genre" name="genre" required>

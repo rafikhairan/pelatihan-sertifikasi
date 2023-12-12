@@ -22,6 +22,9 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'is_admin',
+        'photo',
+        'address'
     ];
 
     /**
@@ -42,4 +45,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getRouteKeyName() {
+        return 'username';
+    }  
 }

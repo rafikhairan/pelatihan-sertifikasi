@@ -46,17 +46,17 @@ class ProfileController extends Controller
         $match = Hash::check($request->old_password, auth()->user()->password);
 
         if (!$match) {
-            return redirect('/profile/change-password')->with('failed', 'Old password you entered is incorrect');
+            return redirect('/profile/change-password')->with('failed', 'Old password you entered is incorrect!');
         }
 
         if ($request->new_password !== $request->confirm_password) {
-            return redirect('/profile/change-password')->with('failed', 'New password and confirmation do not match');
+            return redirect('/profile/change-password')->with('failed', 'New password and confirmation do not match!');
         }
 
         User::where('id', auth()->user()->id)->update([
             'password' => Hash::make($request->new_password)
         ]);
 
-        return redirect('/profile')->with('success', 'Password has been updated');
+        return redirect('/profile')->with('success', 'Password has been updated!');
     }
 }

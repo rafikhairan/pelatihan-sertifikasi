@@ -54,3 +54,13 @@
     </div>
   </div>
 @endsection
+
+@push('scripts')
+  <script>
+    const $photo = $('#photo');
+    $photo.change(function(event) {
+        const imageUrl = URL.createObjectURL(event.target.files[0])
+        $('.img-thumbnail').attr('src', imageUrl)
+    })
+  </script>
+@endpush
