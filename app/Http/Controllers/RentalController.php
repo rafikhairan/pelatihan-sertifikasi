@@ -15,7 +15,7 @@ class RentalController extends Controller
      */
     public function index()
     {
-        if(!auth()->user()->isAdmin) {
+        if(!auth()->user()->is_admin) {
             $rentals = Rental::where('user_id', auth()->user()->id)->latest()->get();
 
             return view('web.rental', compact('rentals'));
