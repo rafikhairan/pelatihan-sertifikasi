@@ -20,6 +20,14 @@ class HomeController extends Controller
 
         $games = Game::all();
 
+        if(request('search')){
+            return view('web.home', [
+                "title" => "Search Result For: ".request('search'),
+                "category" => "keyword '".request('search')."'",
+                "games" => Game::latest()->filter(request(['search']))->get()
+            ]);
+        }
+
         return view('web.home', compact('games'));
     }
 }

@@ -15,7 +15,13 @@ class RentalController extends Controller
      */
     public function index()
     {
-        $rentals = Rental::all();
+        if(!auth()->user()->isAdmin) {
+            $rentals = Rental::where('user_id', auth()->user()->id)->latest()->get();
+
+            return view('web.rental', compact('rentals'));
+        }
+
+        $rentals = Rental::latest('created_at')->get();
 
         return view('rental.index', compact('rentals'));
     }
@@ -80,18 +86,24 @@ class RentalController extends Controller
      */
     public function update(Request $request, Rental $rental)
     {
-        $data = [
-            'status' => $request->status,
-            'return_date' => Carbon::now()->addDays(5)->endOfDay()
-        ];
+        if($request->status === 'Returned') {
+            $data = [
+                'status' => $request->status,
+                'return_date' => Carbon::now(),
+            ];
+        } else {
+            $data = [
+                'status' => $request->status,
+            ];
+        }
 
         if($request->status === 'Returned') {
-            // $now = Carbon::now();
+            $fiveDays = Carbon::now()->addDays(5)->endOfDay();
 
             // Untuk demo 
             $now = Carbon::parse('2023-12-19 00:00:00');
 
-            $data['penalty'] = $now > $rental->return_date ? $now->addDay()->diffInDays($rental->return_date) * 10000 : null;
+            $data['penalty'] = $now > $fiveDays ? $now->addDay()->diffInDays($fiveDays) * 5000 : null;
         }
 
         Rental::where('id', $rental->id)->update($data);

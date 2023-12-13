@@ -15,6 +15,7 @@
             <table class="table" id="table">
                 <thead>
                     <tr>
+                        <th>No.</th>
                         <th>User name</th>
                         <th>Game name</th>
                         <th>Status</th>
@@ -25,15 +26,16 @@
                 <tbody>
                     @foreach($rentals as $rental)
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $rental->user->name }}</td>
                         <td>{{ $rental->game->name }}</td>
                         <td>{{ $rental->status }}</td>
                         <td>{{ $rental->penalty ? 'Rp' . number_format($rental->penalty, 0, ',' , '.') : '-' }}</td>
                         <td>
                             @if($rental->status == 'Pending' or $rental->status == 'Requested')
-                            <button type="button" class="btn badge text-bg-primary ms-1" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="bindingUpdate({{ $rental->id }}, @if($rental->status == 'Pending') 'Approved' @else 'Returned' @endif)">Approve</button>
+                            <button type="button" class="btn btn-sm btn-outline-primary ms-1" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="bindingUpdate({{ $rental->id }}, @if($rental->status == 'Pending') 'Approved' @else 'Returned' @endif)">Approve</button>
                             @elseif($rental->status == 'Approved')
-                            <button type="button" class="btn badge text-bg-success ms-1" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="bindingUpdate({{ $rental->id }}, 'Returned')">Return</button>
+                            <button type="button" class="btn btn-sm btn-outline-success ms-1" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="bindingUpdate({{ $rental->id }}, 'Returned')">Return</button>
                             @endif
                         </td>
                     </tr>

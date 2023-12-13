@@ -66,8 +66,6 @@ class GameController extends Controller
 
         $insertedId = $game->insertGetId($data);
 
-        dd($request->genres);
-
         if($request->genres) {
             foreach($request->genres as $genreId) {
                 GameGenre::create([
@@ -108,13 +106,7 @@ class GameController extends Controller
             return view('web.game', compact('game', 'genres', 'isRented', 'rentalStatus', 'rentalCount'));
         }
 
-        $gameGenreIds = $game->genres->pluck('id')->toArray();
-
-        return view('game.edit', [
-            'data' => $game,
-            'genres' => Genre::all(),
-            'gameGenreIds' => $gameGenreIds
-        ]);
+        return redirect()->route('games.edit', $game->id);
     }
 
     /**
