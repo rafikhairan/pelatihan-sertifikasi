@@ -18,6 +18,7 @@
                         <th>User name</th>
                         <th>Game name</th>
                         <th>Status</th>
+                        <th>Penalty</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -27,6 +28,7 @@
                         <td>{{ $rental->user->name }}</td>
                         <td>{{ $rental->game->name }}</td>
                         <td>{{ $rental->status }}</td>
+                        <td>{{ $rental->penalty ? 'Rp' . number_format($rental->penalty, 0, ',' , '.') : '-' }}</td>
                         <td>
                             @if($rental->status == 'Pending' or $rental->status == 'Requested')
                             <button type="button" class="btn badge text-bg-primary ms-1" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="bindingUpdate({{ $rental->id }}, @if($rental->status == 'Pending') 'Approved' @else 'Returned' @endif)">Approve</button>

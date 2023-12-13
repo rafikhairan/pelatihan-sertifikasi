@@ -65,7 +65,9 @@ class GameController extends Controller
         }
 
         $insertedId = $game->insertGetId($data);
-        
+
+        dd($request->genres);
+
         if($request->genres) {
             foreach($request->genres as $genreId) {
                 GameGenre::create([

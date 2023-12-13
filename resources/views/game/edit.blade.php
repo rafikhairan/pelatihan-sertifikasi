@@ -54,7 +54,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label" for="photo">Genre</label>
-                        <input id="photo" class="form-control" type="file" name="photo">
+                        <input id="photo" class="form-control" type="file" name="photo" accept="image/*">
                     </div>
                     <button class="btn btn-success rounded-0 w-100 py-2">Simpan</button> 
                 </form>
@@ -62,7 +62,7 @@
         </div>
     </div>
     <div class="col-lg-4">
-        <img src="{{ $data->photo ? asset('storage/uploads/' . $data->photo) : asset('assets/img/no-profile.png') }}" class="img-thumbnail" alt="Photo">
+        <img src="{{ $data->photo ? asset('storage/uploads/' . $data->photo) : asset('assets/img/disc.png') }}" class="img-thumbnail" alt="Photo">
     </div>
 </div>
 

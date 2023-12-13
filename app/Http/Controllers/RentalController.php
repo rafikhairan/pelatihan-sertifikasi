@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Rental;
 use Illuminate\Http\Request;
 
@@ -81,7 +82,17 @@ class RentalController extends Controller
     {
         $data = [
             'status' => $request->status,
+            'return_date' => Carbon::now()->addDays(5)->endOfDay()
         ];
+
+        if($request->status === 'Returned') {
+            // $now = Carbon::now();
+
+            // Untuk demo 
+            $now = Carbon::parse('2023-12-19 00:00:00');
+
+            $data['penalty'] = $now > $rental->return_date ? $now->addDay()->diffInDays($rental->return_date) * 10000 : null;
+        }
 
         Rental::where('id', $rental->id)->update($data);
 
