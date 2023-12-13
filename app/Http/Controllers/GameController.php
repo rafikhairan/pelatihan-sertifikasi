@@ -136,18 +136,27 @@ class GameController extends Controller
      */
     public function update(Request $request, Game $game)
     {
-        Game::where('id', $game->id)->update([
-            'name' => $request->name,
-            'publisher' => $request->publisher,
-            'release_date' => $request->release,
-            'platform_id' => $request->platform,
-        ]);
 
-        if($request->file('photo')) {
+        if(!$request->file('photo')) {
+            Game::where('id', $game->id)->update([
+                'name' => $request->name,
+                'publisher' => $request->publisher,
+                'release_date' => $request->release,
+                'platform_id' => $request->platform,
+            ]);
+        } else {
             $photo = explode('.', $request->file('photo')->getClientOriginalName())[0];
             $photo = $photo . '-' . time() . '.' . $request->file('photo')->extension();
             $request->file('photo')->storeAs('public/uploads/game', $photo);
             $data['photo'] = 'game/' . $photo;
+
+            Game::where('id', $game->id)->update([
+                'name' => $request->name,
+                'publisher' => $request->publisher,
+                'release_date' => $request->release,
+                'platform_id' => $request->platform,
+                'photo' => $data['photo']
+            ]);
         }
 
         $gameGenreIds = $game->genres->pluck('id')->toArray();

@@ -28,7 +28,7 @@
                 </p>
             </div>
             <div class="col-lg-4">
-                <img class="img-header border-0 p-0 mb-3" src="{{ $game->photo ? asset('storage/uploads/' . $game->photo) : asset('assets/img/disc.png') }}">
+                <img class="img-product border-0 p-0 mb-3" src="{{ $game->photo ? asset('storage/uploads/' . $game->photo) : asset('assets/img/disc.png') }}">
                 @if(!$isRented or $rentalStatus->status != 'Approved' and $rentalStatus->status != 'Requested')
                 <form action="{{ route('rentals.store') }}" method="post">
                     @csrf

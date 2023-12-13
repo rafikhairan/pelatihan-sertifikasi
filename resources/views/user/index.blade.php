@@ -39,9 +39,9 @@
                         <tr>
                             <td>
                                 @if ($user->photo !== null)
-                                    <img src="{{ asset('storage/uploads/' . $user->photo) }}" class="rounded-circle" alt="Image" width="30px">
+                                    <img src="{{ asset('storage/uploads/' . $user->photo) }}" class="rounded-circle img-photo" alt="Image" width="30px">
                                 @else
-                                    <img src="{{ asset('assets/img/no-profile.png') }}" class="rounded-circle" alt="Image" width="30px">
+                                    <img src="{{ asset('assets/img/no-profile.png') }}" class="rounded-circle img-photo" alt="Image" width="30px">
                                 @endif
                             </td>
                             <td>{{ $user->username }}</td>

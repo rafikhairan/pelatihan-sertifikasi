@@ -53,7 +53,7 @@
                         </select>
                     </div>
                     <div class="form-group mb-3">
-                        <label class="form-label" for="photo">Genre</label>
+                        <label class="form-label" for="photo">Photo</label>
                         <input id="photo" class="form-control" type="file" name="photo" accept="image/*">
                     </div>
                     <button class="btn btn-success rounded-0 w-100 py-2">Simpan</button> 

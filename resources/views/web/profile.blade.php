@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                <img class="img-thumbnail" src="{{ $user->photo ? asset('storage/uploads/' . $user->photo) : asset('assets/img/no-profile.png') }}">
+                <img class="img-thumbnail img-photo" src="{{ $user->photo ? asset('storage/uploads/' . $user->photo) : asset('assets/img/no-profile.png') }}">
             </div>
         </div>
     </div>

@@ -29,6 +29,7 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{ auth()->user()->photo ? asset('storage/uploads/' . auth()->user()->photo) : asset('assets/img/no-profile.png') }}" class="rounded-circle img-photo me-1" alt="Image" width="25px">
                         {{ auth()->user()->username }}
                     </a>
                     <!-- Here's the magic. Add the .animate and .slideIn classes to your .dropdown-menu and you're all set! -->
