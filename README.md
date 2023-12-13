@@ -1,6 +1,6 @@
 ## About Gameshark
 
-Gameshark merupakan platform web untuk peminjaman gim dan konsol gim. Proyek ini dibuat untuk memenuhi assesment LSP.  
+Gameshark merupakan platform web untuk peminjaman gim dan konsol gim. Proyek ini dibuat untuk memenuhi assesment Pelatihan dan Sertifikasi Pengembang Web LSP Informatika.  
 
 ## Team
 
@@ -10,16 +10,33 @@ Tim kami terdiri dari:
 
 ## Feature
 
-| No.       | Fitur     |
-|-----------|-----------|
-| 1.        | Login     |
-| 2.        | Register  |
+Terdapat 2 role pengguna dalam proyek ini. Berikut merupakan role dengan masing-masing fiturnya:
+1. Admin
+   - Menambahkan, menampilkan, mengubah, menghapus data Game.
+   - Menambahkan, menampilkan, mengubah, menghapus data Tag/Genre Game.
+   - Menambahkan, menampilkan, mengubah, menghapus data Platform Game.
+   - Menambahkan, menampilkan, mengubah, menghapus data User.
+   - Menampilkan seluruh riwayat data peminjaman semua user.
+   - Mengubah status data peminjaman.
+   - Mengubah profil User lain yang memiliki role _user_.
+   - Mengubah profil User sendiri.
+2. User
+   - Mengajukan peminjaman Game kepada User dengan role _admin_ (batas peminjaman yang berlangsung adalah 2 game).
+   - Mengajukan pengembalian Game kepada User dengan role _admin_.
+   - Menampilkan seluruh riwayat peminjaman sendiri.
+   - Mengubah profil.
+  
+Selain itu, beberapa fitur lainnya adalah sebagai berikut:
+- Menambahkan denda secara otomatis ketika waktu peminjaman melebihi 5 hari.
 
 ## Scheme
 
 Berikut merupakan skema database pada proyek ini:
+<img src="https://github.com/rafikhairan/pelatihan-sertifikasi/blob/master/public/assets/img/Skema%20Database.png" alt="Database Scheme">
 
-<img src="https://github.com/rafikhairan/pelatihan-sertifikasi/tree/master/public/assets/img/Skema Database.png" alt="Database Scheme">
+## Preview
+
+
 
 ## Made with
 
