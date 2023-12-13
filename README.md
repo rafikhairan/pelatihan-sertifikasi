@@ -23,6 +23,7 @@ Terdapat 2 role pengguna dalam proyek ini. Berikut merupakan role dengan masing-
 2. User
    - Mengajukan peminjaman Game kepada User dengan role _admin_ (batas peminjaman yang berlangsung adalah 2 game).
    - Mengajukan pengembalian Game kepada User dengan role _admin_.
+   - Mencari data game berdasarkan nama game.
    - Menampilkan seluruh riwayat peminjaman sendiri.
    - Mengubah profil.
   
@@ -36,7 +37,17 @@ Berikut merupakan skema database pada proyek ini:
 
 ## Preview
 
+### Halaman utama pengguna
+<img src="https://github.com/rafikhairan/pelatihan-sertifikasi/blob/master/public/assets/img/preview/preview_01.png" alt="Preview 1">
 
+### Halaman game
+<img src="https://github.com/rafikhairan/pelatihan-sertifikasi/blob/master/public/assets/img/preview/preview_02.png" alt="Preview 2">
+
+### Halaman profil pengguna
+<img src="https://github.com/rafikhairan/pelatihan-sertifikasi/blob/master/public/assets/img/preview/preview_03.png" alt="Preview 3">
+
+### Halaman list peminjaman pengguna
+<img src="https://github.com/rafikhairan/pelatihan-sertifikasi/blob/master/public/assets/img/preview/preview_04.png" alt="Preview 4">
 
 ## Made with
 
