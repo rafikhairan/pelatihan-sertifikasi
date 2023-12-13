@@ -101,7 +101,7 @@ class RentalController extends Controller
             $fiveDays = Carbon::now()->addDays(5)->endOfDay();
 
             // Untuk demo 
-            $now = Carbon::parse('2023-12-19 00:00:00');
+            $now = Carbon::parse('2023-12-12 00:00:00');
 
             $data['penalty'] = $now > $fiveDays ? $now->addDay()->diffInDays($fiveDays) * 5000 : null;
         }
