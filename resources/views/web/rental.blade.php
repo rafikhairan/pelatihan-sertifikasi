@@ -21,6 +21,7 @@
                     <th scope="col">Platform</th>
                     <th scope="col">Date</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Penalty</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +40,7 @@
                         <span class="{{ $rental->status === 'Returned' ? 'text-success' : ($rental->status === 'Pending' ? 'text-warning' : '') }}">{{ $rental->status }}</span>
                         @endif
                     </td>
+                    <td>{{ $rental->penalty ? 'Rp' . number_format($rental->penalty, 0, ',' , '.') : '-' }}</td>
                 </tr>
                 @endforeach
             </tbody>
