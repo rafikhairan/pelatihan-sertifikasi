@@ -3,7 +3,7 @@
     @section('content')
 
     <!-- Header -->
-    <header class="container pt-4">
+    <header class="container pt-5">
         <div class="masthead text-white px-5">
             <h1>Gameshark</h1>
             <h3>Ribuan permainan dalam genggaman.</h3>
