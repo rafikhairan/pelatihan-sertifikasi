@@ -39,9 +39,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'username' => 'unique:users',
-            'email' => 'unique:users',
-            'password' => 'confirmed'
+            'name' => 'required',
+            'username' => 'required|unique:users',
+            'email' => 'required|unique:users',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required'
         ]);
 
         $data = [
@@ -49,7 +51,7 @@ class UserController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'is_admin' => $request->role,
+            'is_admin' => $request->role !== null ? 1 : 0,
             'address' => $request->address
         ];
 
@@ -84,9 +86,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        if(auth()->user()->username !== 'admin' && $user->is_admin) {
-            abort(403);
-        }
+        $this->checkAdmin($user);
 
         return view('user.edit', compact('user'));
     }
@@ -100,9 +100,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if(auth()->user()->username !== 'admin' && $user->is_admin) {
-            abort(403);
-        }
+        $this->checkAdmin($user);
 
         $request->validate([
             'username' => 'unique:users,username,'.$user->id,
@@ -114,7 +112,7 @@ class UserController extends Controller
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
-            'is_admin' => $request->role,
+            'is_admin' => $request->role !== null ? 1 : 0,
             'address' => $request->address
         ];
 
@@ -142,12 +140,17 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if(auth()->user()->username !== 'admin' && $user->is_admin) {
-            abort(403);
-        }
+        $this->checkAdmin($user);
 
         $user->delete();
 
         return redirect('/users')->with('success', 'User successfully deleted.');
+    }
+
+    public function checkAdmin($user)
+    {
+        if(auth()->user()->username !== 'admin' && $user->is_admin) {
+            abort(403);
+        }
     }
 }

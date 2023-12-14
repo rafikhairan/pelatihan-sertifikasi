@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/genres', GenreController::class)->except(['create', 'show', 'edit']);
     Route::resource('/platforms', PlatformController::class)->except(['create', 'show', 'edit']);
     Route::resource('/rentals', RentalController::class)->except(['create', 'show', 'edit', 'delete']);
+    Route::get('/rentals/print', [RentalController::class, 'printPdf'])->name('rentals.print');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');

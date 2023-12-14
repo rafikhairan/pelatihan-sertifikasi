@@ -26,7 +26,7 @@
             <table class="table" id="table">
                 <thead>
                     <tr>
-                        <th>No.</th>
+                        <th>No</th>
                         <th>Name</th>
                         <th>Publisher</th>
                         <th>Genre</th>

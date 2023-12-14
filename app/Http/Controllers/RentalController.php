@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Rental;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class RentalController extends Controller
@@ -91,19 +92,20 @@ class RentalController extends Controller
                 'status' => $request->status,
                 'return_date' => Carbon::now(),
             ];
+
+            $fiveDays = Carbon::parse($rental->created_at)->addDays(5)->endOfDay();
+
+            // Untuk real case ketika project sudah digunakan
+            $now = Carbon::now();
+            
+            // Untuk demo ketika mengembalikan lebih dari 5 hari, tinggal disesuaikan dari tanggal rental dibuat +6 hari
+            // $now = Carbon::parse('2023-12-23 00:00:00');
+
+            $data['penalty'] = $now > $fiveDays ? $now->addDay()->diffInDays($fiveDays) * 5000 : null;
         } else {
             $data = [
                 'status' => $request->status,
             ];
-        }
-
-        if($request->status === 'Returned') {
-            $fiveDays = Carbon::now()->addDays(5)->endOfDay();
-
-            // Untuk demo 
-            $now = Carbon::parse('2023-12-19 00:00:00');
-
-            $data['penalty'] = $now > $fiveDays ? $now->addDay()->diffInDays($fiveDays) * 5000 : null;
         }
 
         Rental::where('id', $rental->id)->update($data);
@@ -120,5 +122,16 @@ class RentalController extends Controller
     public function destroy(Rental $rental)
     {
         //
+    }
+
+    public function printPdf() 
+    {
+        $rentals = Rental::all();
+
+        $pdf = Pdf::loadView('pdf.rentals', [
+            'rentals' => $rentals
+        ]);
+        
+        return $pdf->download('rentals.pdf');
     }
 }

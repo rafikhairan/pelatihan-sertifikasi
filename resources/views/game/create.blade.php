@@ -25,31 +25,56 @@
                     @csrf
                     <div class="form-group mb-3">
                         <label class="form-label" for="name">Name</label>
-                        <input id="name" class="form-control" type="text" name="name" placeholder="Game Name">
+                        <input id="name" class="form-control @error('name') is-invalid @enderror" type="text" name="name" placeholder="Game Name">
+                        @error('name')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label" for="publisher">Publisher</label>
-                        <input id="publisher" class="form-control" type="text" name="publisher" placeholder="Game Publisher">
+                        <input id="publisher" class="form-control @error('publisher') is-invalid @enderror" type="text" name="publisher" placeholder="Game Publisher">
+                        @error('publisher')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label" for="release">Release Date</label>
-                        <input id="release" class="form-control" type="date" name="release">
+                        <input id="release" class="form-control @error('release') is-invalid @enderror" type="date" name="release">
+                        @error('release')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label" for="platform">Platform</label>
-                        <select id="platform" class="form-select" aria-label="Default select example" name="platform">
+                        <select id="platform" class="form-select @error('platform') is-invalid @enderror" aria-label="Default select example" name="platform" required>
                             @foreach($platforms as $platform)
                             <option value="{{ $platform->id }}">{{ $platform->name }}</option>
                             @endforeach
                         </select>
+                        @error('platform')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label" for="publisher">Genre</label>
-                        <select class="form-select" id="multiple-select-field" data-placeholder="Choose anything" name="genres[]" multiple>
+                        <select class="form-select @error('genres') is-invalid @enderror" id="multiple-select-field" data-placeholder="Choose anything" name="genres[]" multiple required>
                             @foreach($genres as $genre)
                             <option value="{{ $genre->id }}">{{ $genre->name }}</option>
                             @endforeach
                         </select>
+                        @error('genres')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label" for="photo">Photo</label>

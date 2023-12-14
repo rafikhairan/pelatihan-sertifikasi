@@ -37,6 +37,10 @@ class PlatformController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'platform' => 'required'
+        ]);
+
         Platform::create([
             'name' => $request->platform
         ]);
@@ -75,6 +79,10 @@ class PlatformController extends Controller
      */
     public function update(Request $request, Platform $platform)
     {
+        $request->validate([
+            'platform' => 'required'
+        ]);
+
         Platform::where('id', $platform->id)->update([
             'name' => $request->platform
         ]);

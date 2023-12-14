@@ -38,6 +38,10 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'genre' => 'required'
+        ]);
+
         Genre::create([
             'name' => $request->genre
         ]);
@@ -76,6 +80,10 @@ class GenreController extends Controller
      */
     public function update(Request $request, Genre $genre)
     {
+        $request->validate([
+            'genre' => 'required'
+        ]);
+
         $genre->update([
             'name' => $request->genre
         ]);

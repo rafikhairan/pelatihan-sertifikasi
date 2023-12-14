@@ -48,6 +48,14 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'publisher' => 'required',
+            'release' => 'required',
+            'platform' => 'required',
+            'genres' => 'required',
+        ]);
+
         $game = new Game();
 
         $data = [
@@ -136,6 +144,14 @@ class GameController extends Controller
      */
     public function update(Request $request, Game $game)
     {
+        $request->validate([
+            'name' => 'required',
+            'publisher' => 'required',
+            'release' => 'required',
+            'platform' => 'required',
+            'genres' => 'required',
+        ]);
+
         Game::where('id', $game->id)->update([
             'name' => $request->name,
             'publisher' => $request->publisher,

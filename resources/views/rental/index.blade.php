@@ -1,23 +1,28 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="mb-4">
-        <h2>Rental List</h2>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Tabel User</li>
-            </ol>
-        </nav>
+    <div class="d-flex justify-content-between align-items-center mt-2 mb-3">
+        <div>
+            <h2>Rentals</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Rentals</li>
+                </ol>
+            </nav>
+        </div>
+        <a class="btn btn-primary" href="{{ route('rentals.print') }}">
+            Print
+        </a>
     </div>
     <div class="card">
         <div class="card-body">
             <table class="table" id="table">
                 <thead>
                     <tr>
-                        <th>No.</th>
-                        <th>User name</th>
-                        <th>Game name</th>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Game</th>
                         <th>Status</th>
                         <th>Penalty</th>
                         <th>Action</th>

@@ -10,19 +10,23 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        if(!auth()->user()->is_admin) {
-            $user = User::where('id', auth()->user()->id)->first();
+        $user = User::where('id', auth()->user()->id)->first();
 
+        if(!$user->is_admin) {
             return view('web.profile', compact('user'));
         }
-
-        $user = User::where('id', auth()->user()->id)->first();
 
         return view('profile.index', compact('user'));
     }
 
     public function changePassword()
     {
+        $user = User::where('id', auth()->user()->id)->first();
+
+        if(!$user->is_admin) {
+            return view('web.change_password', compact('user'));
+        }
+
         return view('profile.change_password');
     }
 

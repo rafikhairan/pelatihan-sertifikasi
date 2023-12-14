@@ -21,6 +21,12 @@
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   @endif
+  @error('genre')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ $message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  @endif
   <div class="card">
     <div class="card-body">
       <table class="table" id="table">
@@ -61,7 +67,7 @@
           <div class="modal-body px-4 pb-4 pt-3">
             <div class="mb-3">
               <label for="genre" class="form-label">Name</label>
-              <input type="text" class="form-control" id="genre" name="genre" required>
+              <input type="text" class="form-control" id="genre" name="genre">
             </div>
             <div class="d-grid">
               <button type="submit" class="btn btn-primary w-full">Save</button>
@@ -112,7 +118,7 @@
           <div class="modal-body px-4 pb-4 pt-3">
             <div class="mb-3">
               <label for="edit-genre" class="form-label">Name</label>
-              <input type="text" class="form-control" id="edit-genre" name="genre" required>
+              <input type="text" class="form-control" id="edit-genre" name="genre">
             </div>
             <div class="d-grid">
               <button type="submit" class="btn btn-primary w-full">Save</button>

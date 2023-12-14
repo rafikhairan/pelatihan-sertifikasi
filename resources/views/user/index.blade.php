@@ -26,6 +26,7 @@
             <table class="table" id="table">
                 <thead>
                     <tr>
+                        <td>No</td>
                         <th>Image</th>
                         <th>Username</th>
                         <th>Email</th>
@@ -37,6 +38,7 @@
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
+                            <td>{{ $loop->iteration }}</td>
                             <td>
                                 @if ($user->photo !== null)
                                     <img src="{{ asset('storage/uploads/' . $user->photo) }}" class="rounded-circle" alt="Image" width="30px">
@@ -50,7 +52,7 @@
                             <td>{{ $user->is_admin ? 'Admin' : 'User' }}</td>
                             <td>
                                 <div class="d-flex">
-                                    @if ((auth()->user()->username !== 'admin' && $user->is_admin) || auth()->user()->username === $user->username)
+                                    @if (auth()->user()->username !== 'admin' && $user->is_admin)
                                         <button type="button" class="btn badge text-bg-secondary text-decoration-none" disabled>Edit</button>
                                         <button type="button" class="btn badge text-bg-danger text-decoration-none ms-1" disabled>Delete</button>
                                     @else

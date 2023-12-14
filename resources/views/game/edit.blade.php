@@ -26,34 +26,59 @@
                     @method('PUT')
                     <div class="form-group mb-3">
                         <label class="form-label" for="name">Name</label>
-                        <input id="name" class="form-control" type="text" name="name" placeholder="Game Name" value="{{ $data->name }}">
+                        <input id="name" class="form-control @error('name') is-invalid @enderror" type="text" name="name" placeholder="Game Name" value="{{ $data->name }}">
+                        @error('name')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label" for="publisher">Publisher</label>
-                        <input id="publisher" class="form-control" type="text" name="publisher" placeholder="Game Publisher" value="{{ $data->publisher }}">
+                        <input id="publisher" class="form-control @error('publisher') is-invalid @enderror" type="text" name="publisher" placeholder="Game Publisher" value="{{ $data->publisher }}">
+                        @error('publisher')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label" for="release">Release Date</label>
-                        <input id="release" class="form-control" type="date" name="release" value="{{ $data->release_date }}">
+                        <input id="release" class="form-control @error('release') is-invalid @enderror" type="date" name="release" value="{{ $data->release_date }}">
+                        @error('release')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label" for="platform">Platform</label>
-                        <select id="platform" class="form-select" aria-label="Default select example" name="platform">
+                        <select id="platform" class="form-select @error('platform') is-invalid @enderror" aria-label="Default select example" name="platform">
                             @foreach($platforms as $platform)
                             <option value="{{ $platform->id }}" @if($data->platform_id == $platform->id) selected @endif>{{ $platform->name }}</option>
                             @endforeach
                         </select>
+                        @error('platform')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label" for="publisher">Genre</label>
-                        <select class="form-select" id="multiple-select-field" data-placeholder="Choose anything" name="genres[]" multiple>
+                        <select class="form-select @error('genres') is-invalid @enderror" id="multiple-select-field" data-placeholder="Choose anything" name="genres[]" multiple>
                             @foreach($genres as $genre)
                             <option value="{{ $genre->id }}" @if(in_array($genre->id, $gameGenreIds)) selected @endif>{{ $genre->name }}</option>
                             @endforeach
                         </select>
+                        @error('genres')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <label class="form-label" for="photo">Genre</label>
+                        <label class="form-label" for="photo">Photo</label>
                         <input id="photo" class="form-control" type="file" name="photo" accept="image/*">
                     </div>
                     <button class="btn btn-success rounded-0 w-100 py-2">Simpan</button> 

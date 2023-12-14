@@ -50,20 +50,20 @@
                             </li>
                             @if (auth()->user()->is_admin) 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/users">User</a>
+                                    <a class="nav-link" href="/users">Users</a>
                                 </li>
                             @endif
                             <li class="nav-item">
-                                <a class="nav-link" href="/games">Game</a>
+                                <a class="nav-link" href="/games">Games</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/rentals">Rental</a>
+                                <a class="nav-link" href="/rentals">Rentals</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/genres">Genre</a>
+                                <a class="nav-link" href="/genres">Genres</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/platforms">Platform</a>
+                                <a class="nav-link" href="/platforms">Platforms</a>
                             </li>
                         </ul>
                     </div>

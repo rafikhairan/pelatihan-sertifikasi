@@ -21,6 +21,12 @@
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   @endif
+  @error('platform')
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ $message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  @endif
   <div class="card">
     <div class="card-body">
       <table class="table" id="table">

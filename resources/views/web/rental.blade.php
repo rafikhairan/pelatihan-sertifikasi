@@ -16,7 +16,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">No.</th>
+                    <th scope="col">No</th>
                     <th scope="col">Game</th>
                     <th scope="col">Platform</th>
                     <th scope="col">Date</th>
@@ -27,7 +27,7 @@
             <tbody>
                 @foreach($rentals as $rental)
                 <tr>
-                    <th>{{ $loop->iteration }}</th>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $rental->game->name }}</td>
                     <td>{{ $rental->game->platform->name }}</td>
                     <td>{{ date('d M Y', strtotime($rental->created_at)) }}</td>

@@ -44,11 +44,11 @@
         </div>
         <div class="mb-3">
           <label for="username" class="form-label">Username</label>
-          <input type="text" class="form-control" id="username" name="username" value="{{ $user->username }}" required>
+          <input type="text" class="form-control" id="username" name="username" value="{{ $user->username }}" required {{ $user->username === 'admin' ? 'disabled' : '' }}>
         </div>
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
+          <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required {{ $user->username === 'admin' ? 'disabled' : '' }}>
         </div>
         <div class="mb-3">
           <label for="photo" class="form-label">Photo</label>
