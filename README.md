@@ -49,6 +49,9 @@ Berikut merupakan skema database pada proyek ini:
 ### Halaman list peminjaman pengguna
 <img src="https://github.com/rafikhairan/pelatihan-sertifikasi/blob/master/public/assets/img/preview/preview_04.png" alt="Preview 4">
 
+## Video Demo
+https://drive.google.com/file/d/19I_Jl22bYTFxD2LW6PlQhPEuQ7vjjdqc/view?usp=sharing
+
 ## Made with
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
