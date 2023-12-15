@@ -57,7 +57,7 @@
                                 <div class="form-group mb-3">
                                     <input type="text" class="form-control @error('username') is-invalid @enderror" name="username"
                                         id="InputUsername" value="{{ old('username') }}" placeholder="Username" required>
-                                    @error('email')
+                                    @error('username')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
