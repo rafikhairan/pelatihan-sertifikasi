@@ -52,7 +52,7 @@
                             <td>{{ $user->is_admin ? 'Admin' : 'User' }}</td>
                             <td>
                                 <div class="d-flex">
-                                    @if (auth()->user()->username !== 'admin' && $user->is_admin)
+                                    @if ((auth()->user()->username !== 'admin' && $user->is_admin) || $user->username === 'admin')
                                         <button type="button" class="btn badge text-bg-secondary text-decoration-none" disabled>Edit</button>
                                         <button type="button" class="btn badge text-bg-danger text-decoration-none ms-1" disabled>Delete</button>
                                     @else

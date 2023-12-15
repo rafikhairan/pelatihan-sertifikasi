@@ -149,7 +149,7 @@ class UserController extends Controller
 
     public function checkAdmin($user)
     {
-        if(auth()->user()->username !== 'admin' && $user->is_admin) {
+        if((auth()->user()->username !== 'admin' && $user->is_admin) || $user->username === 'admin') {
             abort(403);
         }
     }
